@@ -76,7 +76,8 @@ Example: Combining *rule1* and *rule2* using the *AND* operator.
 - **Input**: The combined rule’s AST and a dictionary of user attributes.
 - This function recursively evaluates the AST based on the user data.
 
-`def evaluate_rule(ast, user_data):
+```
+def evaluate_rule(ast, user_data):
     if ast.type == "operand":
         return eval_condition(ast.value, user_data)
     elif ast.type == "operator":
@@ -90,45 +91,61 @@ Example: Combining *rule1* and *rule2* using the *AND* operator.
 
 def eval_condition(condition, user_data):
     # For example, 'age > 30' becomes 'user_data['age'] > 30'
-    return eval(condition.format(**user_data))`
-
-
-
+    return eval(condition.format(**user_data))
+```
     
-5. Test Cases:
-•	Test 1: Create individual rules:
-o	Input: create_rule("age > 30 AND department = 'Sales'")
-o	Expected Output: AST representation of the rule.
-•	Test 2: Combine rules:
-o	Input: Combine "age > 30 AND department = 'Sales'" and "salary > 50000"
-o	Expected Output: AST representing "(age > 30 AND department = 'Sales') AND (salary > 50000)"
-•	Test 3: Evaluate combined rule:
-o	Input: Rule AST, and user data {'age': 35, 'department': 'Sales', 'salary': 60000}
-o	Expected Output: True
-6. Data Storage:
-•	Choice of Database: Use a SQL database like PostgreSQL or a NoSQL solution like MongoDB.
-o	SQL for strict schema and relations.
-o	NoSQL for dynamic rules and schema-less flexibility.
-Schema Example (SQL):
-•	Rules Table:
-o	id: Unique identifier
-o	rule_string: Original rule string
-o	ast: Serialized AST structure
-o	created_at: Timestamp
-o	updated_at: Timestamp
+#### **5. Test Cases:**
+- **Test 1**: Create individual rules:
+
+  o	**Input**: *create_rule("age > 30 AND department = 'Sales'")*
+
+  o	Expected Output: AST representation of the rule.
+  
+- **Test 2**: Combine rules:
+  o	**Input:** Combine *"age > 30 AND department = 'Sales'" and "salary > 50000*
+  
+  o	Expected Output: AST representing *"(age > 30 AND department = 'Sales') AND (salary > 50000)"*
+  
+- **Test 3**: Evaluate combined rule:
+  o	**Input:** Rule AST, and user data *{'age': 35, 'department': 'Sales', 'salary': 60000}*
+  
+  o	Expected Output: *True*
+  
+#### **6. Data Storage:**
+- **Choice of Database:** Use a SQL database like PostgreSQL or a NoSQL solution like MongoDB.
+  
+  o	SQL for strict schema and relations.
+
+  o	NoSQL for dynamic rules and schema-less flexibility.
+
+###### **Schema Example (SQL):**
+- **Rules Table:**
+  o	_id_: Unique identifier
+  
+  o	_rule_string:_ Original rule string
+  
+  o	_ast:_ Serialized AST structure
+  
+  o	_created_at:_ Timestamp
+  
+  o	_updated_at:_ Timestamp
+  
 sql
-Copy code
-CREATE TABLE rules (
+
+`CREATE TABLE rules (
   id SERIAL PRIMARY KEY,
   rule_string TEXT NOT NULL,
   ast JSONB,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
-);
-Schema Example (MongoDB):
-•	MongoDB document for rules:
-json
-Copy code
+);`
+
+
+**Schema Example (MongoDB):**
+
+- MongoDB document for rules:
+_json_
+```
 {
   "_id": ObjectId("..."),
   "rule_string": "age > 30 AND department = 'Sales'",
@@ -141,8 +158,12 @@ Copy code
   "created_at": "2024-10-23T12:34:56Z",
   "updated_at": "2024-10-23T12:34:56Z"
 }
-7. Sample Rules for Testing:
-•	Rule 1: "((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"
-•	Rule 2: "((age > 30 AND department = 'Marketing')) AND (salary > 20000 OR experience > 5)"
+
+```
+#### **7. Sample Rules for Testing:**
+
+- **Rule 1:** _"((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"_
+- **Rule 2: **_"((age > 30 AND department = 'Marketing')) AND (salary > 20000 OR experience > 5)"_
+
 These can be used to verify AST creation, combination, and evaluation logic.
 
