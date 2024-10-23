@@ -46,7 +46,7 @@ A rule AST can be represented by a simple Node structure with fields for type, l
 2.	Construct an AST where nodes represent operators (*AND, OR*) and operands (*age > 30, salary > 50000*).
 3.	Return the root of the AST.
 
-Example for *create_rule("age > 30 AND department = 'Sales'")**:
+Example for *create_rule("age > 30 AND department = 'Sales'")*:
 
 
      rule1 = Node("operator", "AND",
