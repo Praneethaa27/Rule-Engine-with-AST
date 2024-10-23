@@ -11,25 +11,24 @@ rule_engine/
 
 
 ├── models/
-│   ── rule_model.py      # Defines database schema and interaction with DB (ORM)
+   │── rule_model.py      # Defines database schema and interaction with DB (ORM)
 
-│
 ├── services/
-│   ── rule_service.py    # Business logic for rule creation, combination, and evaluation
+   │── rule_service.py    # Business logic for rule creation, combination, and evaluation
 
-│
+
 ├── utils/
-│   ── ast_utils.py       # Helper functions for AST creation and traversal
-│
+   │── ast_utils.py       # Helper functions for AST creation and traversal
+
 
 ├── frontend/
-│   ── index.html         # Simple UI for inputting rules and testing
+   │── index.html         # Simple UI for inputting rules and testing
 
-│
+
 ├── tests/
-│   ── test_rule_engine.py  # Unit tests for rule engine components
+  │── test_rule_engine.py  # Unit tests for rule engine components
 
-│
+
 └── migrations/            # Database migrations (if using a migration tool)
 
 1. ***app.py*** - **Main Entry Point (API Layer)**
