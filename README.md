@@ -26,10 +26,8 @@ We can break down the project into the following parts:
 
 #### 3. **AST Data Structure:**
 A rule AST can be represented by a simple Node structure with fields for type, left, right, and value:
-
-
-   class Node:
    
+    Class Node: 
     def __init__(self, node_type, value=None, left=None, right=None):
         self.type = node_type  # 'operator' or 'operand'
         self.value = value  # for operands (like 'age > 30')
@@ -37,28 +35,33 @@ A rule AST can be represented by a simple Node structure with fields for type, l
         self.right = right  # right child node (for operators like AND/OR)
 
         
-5. Detailed Design:
-(A) Create Rule (create_rule):
-•	Input: A rule string like "((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"
-•	This function parses the rule and converts it into an AST structure.
-Steps:
+#### 4. **Detailed Design:**
+
+**(A) Create Rule (create_rule):**
+- **Input**: A rule string like ***"((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"**
+- This function parses the rule and converts it into an AST structure.
+
+**Steps:**
 1.	Tokenize the rule string.
-2.	Construct an AST where nodes represent operators (AND, OR) and operands (age > 30, salary > 50000).
+2.	Construct an AST where nodes represent operators (*AND, OR*) and operands (*age > 30, salary > 50000*).
 3.	Return the root of the AST.
-Example for create_rule("age > 30 AND department = 'Sales'"):
-python
-Copy code
-rule1 = Node("operator", "AND",
+
+Example for *create_rule("age > 30 AND department = 'Sales'")**:
+
+
+     rule1 = Node("operator", "AND",
              Node("operand", "age > 30"),
              Node("operand", "department = 'Sales'")
             )
-(B) Combine Rules (combine_rules):
-•	Input: List of rule strings.
-•	This function takes the ASTs for individual rules and combines them using an efficient strategy.
-Example: Combining rule1 and rule2 using the AND operator.
-python
-Copy code
-def combine_rules(rules):
+            
+**(B) Combine Rules (combine_rules):**
+- Input: List of rule strings.
+- This function takes the ASTs for individual rules and combines them using an efficient strategy.
+  
+Example: Combining *rule1* and *rule2* using the *AND* operator.
+
+
+    def combine_rules(rules):
     # Assuming 'rules' is a list of rule strings
     combined_root = None
     for rule_string in rules:
@@ -68,26 +71,29 @@ def combine_rules(rules):
         else:
             combined_root = rule_ast
     return combined_root
-(C) Evaluate Rule (evaluate_rule):
-•	Input: The combined rule’s AST and a dictionary of user attributes.
-•	This function recursively evaluates the AST based on the user data.
-python
-Copy code
-def evaluate_rule(ast, user_data):
-    if ast.type == "operand":
-        return eval_condition(ast.value, user_data)
-    elif ast.type == "operator":
-        left_result = evaluate_rule(ast.left, user_data)
-        right_result = evaluate_rule(ast.right, user_data)
-        if ast.value == "AND":
-            return left_result and right_result
-        elif ast.value == "OR":
-            return left_result or right_result
-    return False
 
-def eval_condition(condition, user_data):
-    # For example, 'age > 30' becomes `user_data['age'] > 30`
-    return eval(condition.format(**user_data))
+**(C) Evaluate Rule (evaluate_rule):**
+- **Input**: The combined rule’s AST and a dictionary of user attributes.
+- This function recursively evaluates the AST based on the user data.
+
+`def evaluate_rule(ast, user_data):
+        if ast.type == "operand":
+          return eval_condition(ast.value, user_data)
+      elif ast.type == "operator":
+          left_result = evaluate_rule(ast.left, user_data)
+          right_result = evaluate_rule(ast.right, user_data)
+          if ast.value == "AND":
+              return left_result and right_result
+          elif ast.value == "OR":
+               return left_result or right_result
+       return False
+
+   def eval_condition(condition, user_data):
+      # For example, 'age > 30' becomes `user_data['age'] > 30`
+      return eval(condition.format(**user_data))`
+
+
+    
 5. Test Cases:
 •	Test 1: Create individual rules:
 o	Input: create_rule("age > 30 AND department = 'Sales'")
