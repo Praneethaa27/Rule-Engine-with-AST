@@ -77,20 +77,21 @@ Example: Combining *rule1* and *rule2* using the *AND* operator.
 - This function recursively evaluates the AST based on the user data.
 
 `def evaluate_rule(ast, user_data):
-        if ast.type == "operand":
-          return eval_condition(ast.value, user_data)
-      elif ast.type == "operator":
-          left_result = evaluate_rule(ast.left, user_data)
-          right_result = evaluate_rule(ast.right, user_data)
-          if ast.value == "AND":
-              return left_result and right_result
-          elif ast.value == "OR":
-               return left_result or right_result
-       return False
+    if ast.type == "operand":
+        return eval_condition(ast.value, user_data)
+    elif ast.type == "operator":
+        left_result = evaluate_rule(ast.left, user_data)
+        right_result = evaluate_rule(ast.right, user_data)
+        if ast.value == "AND":
+            return left_result and right_result
+        elif ast.value == "OR":
+            return left_result or right_result
+    return False
 
-   def eval_condition(condition, user_data):
-      # For example, 'age > 30' becomes `user_data['age'] > 30`
-      return eval(condition.format(**user_data))`
+def eval_condition(condition, user_data):
+    # For example, 'age > 30' becomes 'user_data['age'] > 30'
+    return eval(condition.format(**user_data))`
+
 
 
     
