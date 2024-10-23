@@ -33,36 +33,27 @@ rule_engine/
 └── migrations/            # Database migrations (if using a migration tool)
 
 1. ***app.py*** - **Main Entry Point (API Layer)**
-   
 - This file initializes the Flask application, defines API routes, and connects to the backend services.
 
 2. ***config.py*** - **Configuration**
-
 - This file stores the database connection and environment configuration.
 
 3. ***models/rule_model.py*** - **Database Schema (ORM)**
-
 - This file defines the Rule model and interacts with the database using an ORM (like SQLAlchemy).
 
 4. ***services/rule_service.py*** - **Business Logic for Rules**
-
 - This file implements the core logic for rule creation, combination, and evaluation.
 
-
 5. ***utils/ast_utils.py*** - **AST Helper Functions**
-
 - This file contains utility functions to handle AST creation, traversal, and evaluation.
 
 6. ***frontend/index.html*** - **Simple Frontend (Optional)**
-
 - This file serves as a basic UI where users can input rules and test them.
 
 7. ***tests/test_rule_engine.py*** - **Unit Tests**
-
 - This file contains unit tests for the rule engine functionality.
 
 8. ***requirements.txt*** - **Python Dependencies**
-
 - List the required Python packages for your project
 
 #### Explanation:
