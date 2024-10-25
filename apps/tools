@@ -1,2 +1,9 @@
-1. Pycharm/VSCode for creating
-2. Postman for testing
+1) PyCharm/VSCode:
+
+These IDEs help in writing, debugging, and organizing the Python code for the rule engine.
+Both support essential features like syntax highlighting, auto-completion, version control, and virtual environments, making them suitable for handling Flask projects.
+
+2)Postman:
+
+Postman is used for testing the REST API endpoints in the application (e.g., /create_rule, /modify_rule).
+It allows you to send HTTP requests, check responses, and validate error handling for different test cases.
